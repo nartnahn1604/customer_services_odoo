@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<odoo>
+        <record id='customer_services_action' model='ir.actions.act_window'>
+            <field name="name">Customer Services</field>
+            <field name="res_model">customer.info</field>
+            <field name="view_mode">tree,form,kanban</field>
+        </record>
+    
+        <menuitem name="Customer Service" id="customer_base_menu" />
+        <menuitem name="Customer Info" id="customer_info_menu" parent="customer_base_menu" action="customer_services_action"/>
+    
+        <record id="customer_service_view_form" model="ir.ui.view">
+            <field name="name">Customer Service Form</field>
+            <field name="model">customer.info</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="state" invisible="1"/>
+                        <button id="btn_assign_to_me" name="assign_to_me" string="Assign to me" type="object" attrs="{'invisible':[('state','=','assigned')]}"/>
+                        <button id="btn_unassigned" name="unassigned" string="Unassigned" type="object" attrs="{'invisible':[('state','=','unassigned')]}"/>
+                        <button name="show_all_transaction" string="Show all transaction" type="object"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="phone_number"/>
+                                <field name="email"/>
+                            </group>
+                            <group>
+                                <field name="address"/>
+                                <field name="identity_card"/>
+                                <field name="is_loyal_customer"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    
+        <record id="customer_service_view_tree" model="ir.ui.view"> 
+            <field name="name">Customer Service List</field> 
+            <field name="model">customer.info</field> 
+            <field name="arch" type="xml"> 
+                <tree> 
+                    <field name="name"/>
+                    <field name="phone_number"/>
+                    <field name="email"/>
+                    <field name="is_loyal_customer"/>
+                </tree> 
+            </field> 
+        </record>
+        
+        <record id="customer_service_view_kanban" model="ir.ui.view"> 
+            <field name="name">Customer Service Kanban</field> 
+            <field name="model">customer.info</field> 
+            <field name="arch" type="xml"> 
+                <kanban> 
+                    <field name="name"/>
+                    <field name="phone_number"/>
+                    <field name="email"/>
+                    <field name="is_loyal_customer"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_details">
+                                <ul style="list-style-type: none;">
+                                    <li>
+                                        Name: <field name="name"/>
+                                    </li>
+                                    <li>
+                                        Phone number: <field name="phone_number"/>
+                                    </li>
+                                    <li>
+                                        Email: <field name="email"/>
+                                    </li>
+                                    <li>
+                                        Loyal customer: <field name="is_loyal_customer"/>
+                                    </li>
+                                </ul>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban> 
+            </field> 
+        </record>
+
+        <record id="customer_service_view_search" model="ir.ui.view"> 
+            <field name="name">Customer Service Search</field> 
+            <field name="model">customer.info</field> 
+            <field name="arch" type="xml"> 
+                <search> 
+                    <field name="main_servicer"/> 
+                    <field name="is_loyal_customer"/> 
+                    <filter string="None servicer" name="without_servicer" domain="[('main_servicer','=',False)]"/> 
+                </search> 
+            </field>
+        </record>
+
+</odoo>

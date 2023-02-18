@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<odoo>    
+    <record id='customer_transaction_action' model='ir.actions.act_window'>
+        <field name="name">Customer Transaction</field>
+        <field name="res_model">customer.transaction</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <menuitem name="Customer Transaction" id="customer_transaction_menu" parent="customer_base_menu" action="customer_transaction_action"/>
+
+    <record id="customer_transaction_view_tree" model="ir.ui.view"> 
+        <field name="name">Customer Service List</field> 
+        <field name="model">customer.transaction</field> 
+        <field name="arch" type="xml"> 
+            <tree> 
+                <field name="date_time"/>
+                <field name="contents"/>
+                <field name="state"/>
+            </tree> 
+        </field> 
+    </record>
+</odoo>
